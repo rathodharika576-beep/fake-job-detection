@@ -3,4 +3,4 @@ scikit-learn
 numpy==1.26.4
 pillow
 pytesseract
-gunicorns
+gunicorn
