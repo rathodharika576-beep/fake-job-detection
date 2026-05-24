@@ -3,7 +3,7 @@ import pickle
 import re
 import pytesseract
 from PIL import Image
-from pyngrok import ngrok
+
 
 # Tesseract Path
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -94,8 +94,4 @@ def predict():
 # Run Flask App with ngrok
 if __name__ == '__main__':
 
-    public_url = ngrok.connect(addr=5000, bind_tls=True)
-
-    print("🔥 Public URL:", public_url)
-
-    app.run(port=5000)
+    app.run(host='0.0.0.0',port=5000)

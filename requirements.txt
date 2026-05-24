@@ -3,5 +3,4 @@ scikit-learn
 numpy
 pillow
 pytesseract
-pyngrok
 gunicorns
