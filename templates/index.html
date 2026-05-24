@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Fake Job Detection</title>
+
+    <style>
+
+        body{
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .container{
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1{
+            color: #333;
+        }
+
+        textarea{
+            width: 90%;
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button{
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: #0056b3;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Fake Job Posting Detection System</h1>
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+
+            <textarea
+            name="job_description"
+            placeholder="Enter Job Description Here"></textarea>
+            <input type="file" name="job_image">
+            <br><br>
+
+            <button type="submit">Predict</button>
+
+        </form>
+
+        <br>
+
+        {% if prediction_text %}
+
+            {% if "Fake" in prediction_text %}
+
+                <h2 style="color:red;">
+                    {{ prediction_text }}
+                </h2>
+
+                <p style="color:red; font-size:18px;">
+                    ⚠ Warning: This job post contains suspicious hiring patterns.
+                </p>
+
+            {% else %}
+
+                <h2 style="color:green;">
+                    {{ prediction_text }}
+                </h2>
+
+                <p style="color:green; font-size:18px;">
+                    ✔ This posting appears safe based on current analysis.
+                </p>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
