@@ -89,7 +89,7 @@ def predict():
 
         result = f"Real Job Posting ✅ (Real Probability: {probability}%)"
 
-    return render_template('index.html', prediction_text=result)
+    return render_template("index.html", prediction=result,job_description=text)
 
 # Run Flask App with ngrok
 if __name__ == '__main__':
