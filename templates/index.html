@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <title>Fake Job Detection</title>
 
     <style>
 
-        body{
-            background-color: #f2f2f2;
+        body {
             font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
             text-align: center;
-            padding-top: 50px;
+            padding: 40px;
         }
 
-        .container{
-            width: 60%;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-        }
-
-        h1{
+        h1 {
             color: #333;
         }
 
-        textarea{
-            width: 90%;
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            margin: auto;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        textarea {
+            width: 100%;
             height: 200px;
             padding: 10px;
             font-size: 16px;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
             border-radius: 5px;
+            resize: none;
         }
 
-        button{
-            background-color: #007BFF;
+        input[type="file"] {
+            margin-top: 15px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: blue;
             color: white;
-            padding: 12px 25px;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
             cursor: pointer;
         }
 
-        button:hover{
-            background-color: #0056b3;
+        button:hover {
+            background-color: darkblue;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: black;
         }
 
     </style>
@@ -55,52 +67,28 @@
 
 <body>
 
-    <div class="container">
+    <h1>Fake Job Posting Detection System</h1>
 
-        <h1>Fake Job Posting Detection System</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
 
-        <form action="/predict" method="post" enctype="multipart/form-data">
-
-            <textarea
+        <textarea
             name="job_description"
-            placeholder="Enter Job Description Here"></textarea>
-            <input type="file" name="job_image">
-            <br><br>
+            placeholder="Enter job description here..."
+        ></textarea>
 
-            <button type="submit">Predict</button>
+        <br><br>
 
-        </form>
+        <input type="file" name="job_image">
 
         <br>
 
-        {% if prediction_text %}
+        <button type="submit">Predict</button>
 
-            {% if "Fake" in prediction_text %}
+    </form>
 
-                <h2 style="color:red;">
-                    {{ prediction_text }}
-                </h2>
-
-                <p style="color:red; font-size:18px;">
-                    ⚠ Warning: This job post contains suspicious hiring patterns.
-                </p>
-
-            {% else %}
-
-                <h2 style="color:green;">
-                    {{ prediction_text }}
-                </h2>
-
-                <p style="color:green; font-size:18px;">
-                    ✔ This posting appears safe based on current analysis.
-                </p>
-
-            {% endif %}
-
-        {% endif %}
-
-    </div>
+    <h2>
+        {{ prediction_text }}
+    </h2>
 
 </body>
-
 </html>
